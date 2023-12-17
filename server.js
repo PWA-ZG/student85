@@ -17,6 +17,10 @@ const pool = new Pool({
   database: 'baza_jnx3',
   password: 'hISgqvT4fgoEAL7ZpWASewrGJtfw1mWt',
   port: 5432,
+  ssl: {
+    require: true, 
+    rejectUnauthorized: false
+  }
 });
 webpush.setVapidDetails(
   'mailto:your@email.com',
