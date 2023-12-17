@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="/styles/styles.css">
+  <link rel="cert" href="/cert.pem">
+  <link rel="key" href="/key.pem">
+  
+  <title>Podsjetnici</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    label {
+      margin-bottom: 8px;
+    }
+
+    input {
+      margin-bottom: 16px;
+    }
+
+    #reminderButton {
+      background-color: green;
+      padding: 8px 16px;
+      cursor: pointer;
+    }
+  </style>
+  <script>
+    if ('serviceWorker' in navigator && 'PushManager' in window) {
+      navigator.serviceWorker.register('/service-worker.js', { updateViaCache: 'none' })
+        .then(registration => {
+          console.log('Service Worker registered with scope:', registration.scope);
+        })
+        .catch(error => {
+          console.error('Service Worker registration failed:', error);
+        });
+    }
+  </script>
+</head>
+
+<body>
+  <h1>Podsjetnici</h1>
+  <label for="reminderInput">Unesi podsjetnik: </label>
+  <input type="text" id="reminderInput" />
+  <label for="timeInput">Vrijeme: </label>
+  <input type="time" id="timeInput" />
+  <button id="reminderButton">Postavi Podsjetnik</button>
+
+
+  <script src="/scripts/app.js"></script>
+</body>
+
+</html>
+

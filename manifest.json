@@ -1,0 +1,17 @@
+{
+    "name": "Podsjetnik App",
+    "short_name": "ReminderApp",
+    "icons": [
+      {
+        "src": "images/reminderIcon.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ],
+    "description": "Jednostavna aplikacija za postavljanje podsjetnika",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#2196F3"
+  }
+  
