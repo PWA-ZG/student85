@@ -1,45 +1,14 @@
-// document.addEventListener('DOMContentLoaded', function () {
-//   const messageButton = document.getElementById('messageButton');
+document.addEventListener('DOMContentLoaded', function () {
+  const animationContainer = document.getElementById('animationContainer');
 
-//   messageButton.addEventListener('click', function () {
-//     console.log('Kliknuto na gumb za poruku!');
-//     sendMessage();
-//   });
+  if ('animation' in document.createElement('div').style) {
+    animateElement(animationContainer);
+  }
+});
 
-//   function sendMessage() {
-//     const messageText = document.getElementById('messageInput').value;
-
-//     if (!messageText) {
-//       alert('Unesite poruku.');
-//       return;
-//     }
-
-//     const messageData = {
-//       messageText: messageText,
-//     };
-
-//     fetch('/messages', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify(messageData),
-//     })
-//       .then(response => {
-//         if (!response.ok) {
-//           throw new Error('Network response was not ok');
-//         }
-//         return response.json();
-//       })
-//       .then(data => {
-//         console.log('Server response:', data);
-//         // Ovdje možete dodati dodatnu logiku ili ažurirati korisničko sučelje
-//       })
-//       .catch(error => {
-//         console.error('There was a problem with the fetch operation:', error);
-//       });
-//   }
-// });
+function animateElement(element) {
+  element.classList.add('animate');
+}
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -117,11 +86,27 @@ const requestNotificationPermission = async () => {
   }
 
 }
+const animacije=  () => {
+const supportsCSSAnimations = window.CSS && window.CSS.supports && window.CSS.supports('animation: test 0s');
 
+const supportsWebAnimationsAPI = 'animate' in document.createElement('div');
+
+if (supportsCSSAnimations) {
+  console.log('Preglednik podržava CSS animacije.');
+} else {
+  console.log('Preglednik ne podržava CSS animacije.');
+}
+
+if (supportsWebAnimationsAPI) {
+  console.log('Preglednik podržava Web Animations API.');
+} else {
+  console.log('Preglednik ne podržava Web Animations API.');
+}
+}
 const main = async () => {
+  animacije()
   checkPermission()
   await requestNotificationPermission()
   await registerSW()
 }
-
 main()

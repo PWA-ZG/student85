@@ -1,4 +1,18 @@
-/* styles.css */
+.animate {
+  animation: myAnimation 2s ease-in-out infinite;
+}
+
+@keyframes myAnimation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 
 body {
     font-family: 'Arial', sans-serif;

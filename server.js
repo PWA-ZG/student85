@@ -53,13 +53,6 @@ app.post('/reminders', async (req, res) => {
   }
 });
 
-const subDatabse = [];
-
-
-// app.post("/save-subscription", (req, res) => {
-//     subDatabse.push(req.body);
-//     res.json({ status: "Success", message: "Subscription saved!" })
-// })
 
 app.post('/save-subscription', (req, res) => {
   const subscription = req.body;
@@ -93,11 +86,20 @@ app.get("/send-notification", async (req, res) => {
 
 async function checkReminders() {
   try {
-    const reminders = await pool.query('SELECT * FROM reminders WHERE time < CAST(NOW() AS time without time zone)');
-
+    const reminders = await pool.query('SELECT * FROM reminders WHERE time < (CAST(NOW() AS time without time zone) + INTERVAL \'1 hour\')');
+    console.log('!!!');
+    const currentTime = new Date();
+console.log(currentTime);
+    const reminders2 = await pool.query('SELECT * FROM reminders');
+    const reminders3 = await pool.query('SELECT * FROM reminders WHERE time > CAST(NOW() AS time without time zone)');
+    console.log('reminders:', reminders2.rows);
+    console.log('////////////');
+    console.log('reminders:', reminders.rows);
+    console.log('////////////');
+    console.log('reminders:', reminders3.rows);
     reminders.rows.forEach(async reminder => {
       const subscriptions = await pool.query('SELECT * FROM subscriptions');
-      
+      console.log('Subscriptions:', subscriptions.rows);
       subscriptions.rows.forEach(async subscription => {
         try {
           if (!isValidSubscription(subscription)) {
@@ -122,7 +124,7 @@ async function checkReminders() {
 
   try {
    
-    pool.query('DELETE FROM reminders WHERE time < CAST(NOW() AS time without time zone)')
+    pool.query('DELETE FROM reminders WHERE time < (CAST(NOW() AS time without time zone) + INTERVAL \'1 hour\')')
       .then(() => {
         console.log('Expired reminders removed at:', new Date());
       })
@@ -134,7 +136,7 @@ async function checkReminders() {
   }
 
 }
-setInterval(checkReminders, 30000); 
+setInterval(checkReminders, 20000); 
 
 function isValidSubscription(subscription) {
   return (
