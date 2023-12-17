@@ -134,7 +134,7 @@ async function checkReminders() {
   }
 
 }
-setInterval(checkReminders, 30000); 
+setInterval(checkReminders, 10000); 
 
 function isValidSubscription(subscription) {
   return (
