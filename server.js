@@ -12,13 +12,12 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '/'))); 
 
 const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'lab5',
-  password: 'asdf54321',
+  user: 'baza_jnx3_user',
+  host: 'pg-cktb4j0168ec73ceo4ng-a.frankfurt-postgres.render.com',
+  database: 'baza_jnx3',
+  password: 'hISgqvT4fgoEAL7ZpWASewrGJtfw1mWt',
   port: 5432,
 });
-
 webpush.setVapidDetails(
   'mailto:your@email.com',
   'BGEgIkIqtM35J4UW-lZBhI0KrIVIbiFoBCyQog4M7g-53UPUVcwfhORKFDqUunqhPvD9V42GTHbFtCK6VnSYL84',
